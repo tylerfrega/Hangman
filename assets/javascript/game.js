@@ -1,24 +1,10 @@
-	//tracks keystrokes logs if letter is contained on the word
-	document.onkeyup = function logKey(event){
-		var word = game.currentWord[0];
-		var letter = event.key;
-		var el = document.getElementById('letters');
-
-		for(i = 0; i < word.length; i++){
-			if (letter === word.charAt(i)){
-				game.answerArray[i] = letter;
-				el.innerHTML = game.answerArray.join(" ");
-				
-
-			}
-		}
-	}
 
 var game = {
 
-	wordBank: ['horse', 'cowboy', 'gunslinger', 'indian', 'sheriff'],
+	wordBank: ['horse', 'cowboy', 'gunslinger', 'indian', 'sheriff', 'outlaw', 'bandit', 'tumbleweed'],
 	currentWord: [],
-	answerArray: [],
+	correctAnswers: [],
+	wrongAnswers: [],
 
 	//function to produce random word and push word to currentWord array
 	getWord: function(){
@@ -28,19 +14,15 @@ var game = {
 	//displays dashes for each letter of word	
 	displayWord: function(){
 		for(i = 0; i < this.currentWord[0].length; i++){
-			this.answerArray[i] = "_";		
+			this.correctAnswers[i] = "_";		
 		}
 		var el = document.getElementById('letters');
-		el.innerHTML = this.answerArray.join(" ");
+		el.innerHTML = this.correctAnswers.join(" ");
 	},
 
-	gameLoop: function(){
-		var remainingLetters = currentWord.length;
-		while(remainingLetters > 0){
-			var el = document.getElementById('letters');
-			el.innerHTML = this.answerArray.join(" ");
-		}
-
+	displayWrongAnswers: function(){
+		var el = document.getElementById('wrongAnswers');
+		el.innerHTML = this.wrongAnswers.join(' ');
 	}
 
 	};
@@ -48,6 +30,21 @@ var game = {
 	game.getWord();
 	game.displayWord();
 
+	//tracks keystrokes displays letter if word contains letter
+	document.onkeyup = function logKey(event){
+		var word = game.currentWord[0];
+		var letter = event.key;
+		var correctAnswers = document.getElementById('letters');
+		var wrongAnswers = document.getElementById('wrongAnswers');
+
+		for(i = 0; i < word.length; i++){
+			if (letter === word.charAt(i)){
+				game.correctAnswers[i] = letter;
+				correctAnswers.innerHTML = game.correctAnswers.join(" ");
+			}
+
+		}
+	}
 
 
 
