@@ -2,11 +2,13 @@
 	document.onkeyup = function logKey(event){
 		var word = game.currentWord[0];
 		var letter = event.key;
-
+		var el = document.getElementById('letters');
 
 		for(i = 0; i < word.length; i++){
 			if (letter === word.charAt(i)){
-				console.log("it worked");
+				game.answerArray[i] = letter;
+				el.innerHTML = game.answerArray.join(" ");
+				
 
 			}
 		}
@@ -24,13 +26,10 @@ var game = {
 		this.currentWord.push(word);
 		},
 	//displays dashes for each letter of word	
-	getDashes: function(){
+	displayWord: function(){
 		for(i = 0; i < this.currentWord[0].length; i++){
 			this.answerArray[i] = "_";		
 		}
-	},
-
-	displayDashes: function(){
 		var el = document.getElementById('letters');
 		el.innerHTML = this.answerArray.join(" ");
 	},
@@ -47,8 +46,7 @@ var game = {
 	};
 
 	game.getWord();
-	game.getDashes();
-	game.displayDashes();
+	game.displayWord();
 
 
 
