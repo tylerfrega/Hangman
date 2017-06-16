@@ -1,0 +1,32 @@
+body{
+	background-image: url('../images/rmbackground.jpg');
+	background-size: 100%;
+
+	}
+
+
+.container {
+
+	margin-top:10%;
+	background-color: light-gray;
+
+	height: 100%;
+}
+
+
+#wrongAnswers, #letters, h1{
+	text-align: center;
+	margin:2%;
+}
+
+.mortyHeads{
+	border: 2px solid black;
+
+	
+	height:110px;
+	width:50%;
+}
+
+#hide{
+	display:none;
+}
