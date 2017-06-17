@@ -15,7 +15,7 @@ var game = {
 		
 	},
 
-	//gets random word form wordband, displays dashes 
+	//gets random word form wordbank, displays dashes 
 	getWord: function(){
 		var word = this.wordBank[Math.floor(Math.random() * this.wordBank.length)];
 		this.currentWord.push(word);
@@ -29,6 +29,8 @@ var game = {
 		el.innerHTML = this.answer.join(" ");
 	},
 
+	
+
 
 	checkWord: function(){
 
@@ -38,10 +40,21 @@ var game = {
 			var answers = document.getElementById('wrongAnswers');
 			var word = game.currentWord[0];
 			var answer = game.answer.join('');
+			//audio
 			var nice = new Audio('nice.mp3');
 				nice.src = "assets/sound/nice.mp3";
 			var bar = new Audio('bar.mp3');
 				bar.src = "assets/sound/bar.mp3";
+			var schwifty = new Audio('schwifty.mp3');
+				schwifty.src = "assets/sound/schwifty.mp3";
+			//morty heads
+			var mortyOne = document.getElementById('one');
+			var mortyTwo = document.getElementById('two');
+			var mortyThree = document.getElementById('three');
+			var mortyFour = document.getElementById('four');
+			var mortyFive = document.getElementById('five');
+			var mortySix = document.getElementById('six');
+
 					
 			//check for correct answer
 			if(word.includes(letter)){
@@ -60,23 +73,38 @@ var game = {
 				bar.play();
 			}
 
-			if(game.wrongAnswersCounter === 6){
+
+			//displays morty heads for how many guesses left
+			if(game.wrongAnswersCounter === 1){
+				mortyOne.style.display = 'none';
+			}else if(game.wrongAnswersCounter === 2){
+				mortyTwo.style.display = 'none';
+			}else if(game.wrongAnswersCounter === 3){
+				mortyThree.style.display = 'none';
+			}else if(game.wrongAnswersCounter === 4){
+				mortyFour.style.display = 'none';
+			}else if(game.wrongAnswersCounter === 5){
+				mortyFive.style.display = 'none'
+			}else if(game.wrongAnswersCounter === 6){
+				mortySix.style.display = 'none';
 				alert('you lose the answer was ' + game.currentWord[0]);
-				}else if (word === answer){
-				alert('you win');
-			}
-
-				}
-
-			}
-		
-
+			}else if (word === answer){
+				schwifty.play();
+				correctAnswers.innerHTML = 'YOU WIN WABALUBADUBDUB!!!';
+			}		
 			
+
+		}
+
+}
+			
+
+		
 
 		
 
 };
 		
+
 	
 game.init();
-
