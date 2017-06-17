@@ -80,6 +80,8 @@ var game = {
 				//displays morty heads for how many guesses left
 			 if (word === answer){
 					schwifty.play();
+					game.getWord();
+					game.displayWord();
 					correctAnswers.innerHTML = 'YOU WIN WABALUBADUBDUB!!!';
 				}else if(game.wrongAnswersCounter === 1){
 					mortyOne.style.display = 'none';
