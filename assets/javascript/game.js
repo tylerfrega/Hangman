@@ -1,7 +1,7 @@
 
 var game = {
 
-	wordBank: ['shwifty', 'squanch', 'birdperson', 'portal', 'plumbus', 'poopybuthole', 'wubalubadubdub'],
+	wordBank: ['shwifty', 'squanch', 'birdperson', 'portal', 'plumbus', 'wubalubadubdub', 'glipglop'],
 	currentWord: [],
 	answer: [],
 	wrongAnswersCounter: 0,
@@ -35,6 +35,7 @@ var game = {
 	checkWord: function(){
 
 		document.onkeyup = function logKey(event){
+			var alphabet = ['a', 'b','c', 'd', 'e', 'f', 'g', 'h', 'i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
 			var letter = event.key;
 			var correctAnswers = document.getElementById('letters');
 			var answers = document.getElementById('wrongAnswers');
@@ -57,46 +58,49 @@ var game = {
 
 					
 			//check for correct answer
-			if(word.includes(letter)){
-				for(i = 0; i < word.length; i++){
-					if(letter === word[i]){
-						game.answer[i] = letter;
-						correctAnswers.innerHTML = game.answer.join(" ");
-						nice.play();
+	if(alphabet.includes(letter)){
 
-					} 
+				if(word.includes(letter) ){
+					for(i = 0; i < word.length; i++){
+						if(letter === word[i]){
+							game.answer[i] = letter;
+							correctAnswers.innerHTML = game.answer.join(" ");
+							nice.play();
+
+						} 
+					}
+				}else{
+					game.wrongAnswersCounter++;
+					game.answerArray.push(letter);
+					answers.innerHTML = game.answerArray.join(' ');
+					bar.play();
 				}
-			}else{
-				game.wrongAnswersCounter++;
-				game.answerArray.push(letter);
-				answers.innerHTML = game.answerArray.join(' ');
-				bar.play();
+	}
+
+				//displays morty heads for how many guesses left
+			 if (word === answer){
+					schwifty.play();
+					correctAnswers.innerHTML = 'YOU WIN WABALUBADUBDUB!!!';
+				}else if(game.wrongAnswersCounter === 1){
+					mortyOne.style.display = 'none';
+				}else if(game.wrongAnswersCounter === 2){
+					mortyTwo.style.display = 'none';
+				}else if(game.wrongAnswersCounter === 3){
+					mortyThree.style.display = 'none';
+				}else if(game.wrongAnswersCounter === 4){
+					mortyFour.style.display = 'none';
+				}else if(game.wrongAnswersCounter === 5){
+					mortyFive.style.display = 'none'
+				}else if(game.wrongAnswersCounter === 6){
+					mortySix.style.display = 'none';
+					alert('you lose the answer was ' + game.currentWord[0]);
+				}
+				}		
+				
+
 			}
 
 
-			//displays morty heads for how many guesses left
-			if(game.wrongAnswersCounter === 1){
-				mortyOne.style.display = 'none';
-			}else if(game.wrongAnswersCounter === 2){
-				mortyTwo.style.display = 'none';
-			}else if(game.wrongAnswersCounter === 3){
-				mortyThree.style.display = 'none';
-			}else if(game.wrongAnswersCounter === 4){
-				mortyFour.style.display = 'none';
-			}else if(game.wrongAnswersCounter === 5){
-				mortyFive.style.display = 'none'
-			}else if(game.wrongAnswersCounter === 6){
-				mortySix.style.display = 'none';
-				alert('you lose the answer was ' + game.currentWord[0]);
-			}else if (word === answer){
-				schwifty.play();
-				correctAnswers.innerHTML = 'YOU WIN WABALUBADUBDUB!!!';
-			}		
-			
-
-		}
-
-}
 			
 
 		
